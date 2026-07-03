@@ -15,6 +15,14 @@
 	//Get Data
 	$data = file_get_contents('php://input');
 
+	// Print payload to Apache logs so it shows up on Render dashboard
+	if (!empty($data)) {
+		error_log("--- INCOMING JSON PAYLOAD ---");
+		error_log($data);
+		error_log("-----------------------------");
+	}
+
+
 	$auth = $_SERVER['HTTP_AUTHORIZATION'];   //  We need to check the username / password passed in the call
 
 
