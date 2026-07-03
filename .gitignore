@@ -1,0 +1,23 @@
+# Ignore saved JSON data payloads
+data/
+
+# Ignore SSL certificates and keys
+*.pem
+*.crt
+*.key
+*.pfx
+
+# Python cache and temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
