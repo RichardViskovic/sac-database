@@ -41,7 +41,7 @@ CHECK_RESPONSE = """{
         }
       },
       "staff": {
-        "details": false,
+        "details": true,
         "passwords": false,
         "photos": false,
         "timetables": false,
