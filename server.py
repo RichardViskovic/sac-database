@@ -88,36 +88,6 @@ class SMSDirectoryHandler(http.server.BaseHTTPRequestHandler):
         content_length = int(self.headers.get('Content-Length', 0))
         post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else ""
 
-        # Print diagnostic information to help identify truncation
-        actual_bytes = len(post_data.encode('utf-8'))
-        print("\n--- DIAGNOSTICS ---")
-        print(f"Header Content-Length: {content_length} bytes")
-        print(f"Actual Bytes Read:     {actual_bytes} bytes")
-        
-        # Check if Content-Length matches actual read bytes
-        if content_length == actual_bytes:
-            print("Status: Byte length MATCHED")
-        else:
-            print("Status: Byte length MISMATCHED (Truncation detected in transmission)")
-
-        # Verify if the JSON is malformed
-        import json
-        try:
-            parsed_json = json.loads(post_data)
-            print("JSON Parsing:          VALID (No syntax or truncation errors)")
-            # Print structure safely
-            if isinstance(parsed_json, dict):
-                print(f"JSON Top-level Keys:   {list(parsed_json.keys())}")
-        except json.JSONDecodeError as e:
-            print("JSON Parsing:          INVALID / MALFORMED (Payload is incomplete)")
-            print(f"Error Details:         {e}")
-
-        # Show first/last characters to check if Render's UI is just visually clipping the log
-        if post_data:
-            print(f"\nFirst 100 chars: {post_data[:100]}...")
-            print(f"Last 100 chars:  ...{post_data[-100:]}")
-        print("-------------------\n")
-
         if not post_data:
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
