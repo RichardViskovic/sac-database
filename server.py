@@ -30,7 +30,7 @@ CHECK_RESPONSE = """{
         "photos": false,
         "groups": false,
         "awards": false,
-        "timetables": false,
+        "timetables": true,
         "attendance": false,
         "assessments": false,
         "pastoral": false,
