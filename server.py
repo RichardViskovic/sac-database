@@ -88,6 +88,11 @@ class SMSDirectoryHandler(http.server.BaseHTTPRequestHandler):
         content_length = int(self.headers.get('Content-Length', 0))
         post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else ""
 
+        # Print the incoming JSON payload for secure verification in Render's logs
+        print("\n--- INCOMING JSON PAYLOAD ---")
+        print(post_data if post_data else "[Empty Request Body]")
+        print("-----------------------------\n")
+
         if not post_data:
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
